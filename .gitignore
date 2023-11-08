@@ -1,0 +1,10 @@
+.env
+*.venv*
+.DS_Store
+
+# Ignore also the `datasets` and `output` directory
+datasets
+output
+
+# Ignore anything with `scratch` in the name
+*scratch*
