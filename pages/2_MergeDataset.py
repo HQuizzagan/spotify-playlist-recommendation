@@ -4,11 +4,11 @@ from tabulate import tabulate
 import pandas as pd
 
 st.set_page_config(
-  page_title="📊 Merge Dataset",
+  page_title="2 - Merge Dataset",
   page_icon="📊"
 )
 
-st.header('Merge Playlist Dataset')
+st.header('📊 Merge Playlist Dataset')
 
 # Provide description
 st.info('Use this page to merge the TRACK LIST and extracted AUDIO FEATURES for the list into one FULL DATASET.')

@@ -4,11 +4,11 @@ from utilities import ExtractRecommendedTracks as Recommend
 from utilities import Tracks
 
 st.set_page_config(
-  page_title="🎶 Extract Recommended Songs Again",
+  page_title="4 - Extract Recommended Songs Again",
   page_icon="🎶"
 )
 
-st.header('Extract Recommended Songs AGAIN')
+st.header('🎶 Extract Recommended Songs AGAIN')
 st.info('You use this page **AFTER** labelling the initial list of recommended songs as either 0 or 1 based on whether the recommended track indeed belongs to the playlist or not. This is a MANUAL LABELLING process. In this page, you will be able to extract another list of recommended songs based on the labelled recommended songs.')
 
 st.sidebar.markdown('''

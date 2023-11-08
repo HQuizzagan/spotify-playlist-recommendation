@@ -3,11 +3,11 @@ import pandas as pd
 from utilities import Tracks
 
 st.set_page_config(
-  page_title="🎶 Extract Audio Features of Recommended Tracks",
-  page_icon="🎶"
+  page_title="5 - Extract Audio Features of Recommended Tracks",
+  page_icon="🎻"
 )
 
-st.header('Extract Audio Features of Recommended Tracks')
+st.header('🎻 Extract Audio Features of Recommended Tracks')
 st.info('Once all the 200 RECOMMENDED TRACKS have been generated **and labelled**, you can use this page to extract the corresponding AUDIO FEATURES for each recommended track.')
 
 st.sidebar.markdown('''

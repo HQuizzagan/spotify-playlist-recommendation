@@ -6,11 +6,11 @@ from utilities import SpotifyAuth, Playlists, Tracks
 from tabulate import tabulate
 
 st.set_page_config(
-  page_title="🏠 HOME",
+  page_title="HOME",
   page_icon="🏠"
 )
 
-st.header('Spotify Data Scraper')
+st.header('🏠 Spotify Data Scraper')
 st.write('by **HQuizzagan** -- *25th July 2023*')
 
 # Define some session state variables
