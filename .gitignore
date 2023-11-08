@@ -1,4 +1,5 @@
 .env
+*.toml
 *.venv*
 .DS_Store
 
