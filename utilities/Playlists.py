@@ -21,8 +21,8 @@ def getPublicPlaylist(access_token, playlist_id):
     }
 
     # Get info about the playlist itself
-    playlist_info_full = requests.get(
-        f"https://api.spotify.com/v1/playlists/{playlist_id}", headers=headers).json()
+    playlist_info_full = requests.get(f"https://api.spotify.com/v1/playlists/{playlist_id}", headers=headers).json()
+    print(playlist_info_full)
 
     # Get only name and ID of the playlist
     playlist_info = {
