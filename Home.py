@@ -122,6 +122,10 @@ if input_id:
                 file_name=f'{name.title()}-{id}.csv',
                 mime='text/csv',
             )
+            
+        # Check if the `output` folder exists. If not, create it.
+        if not os.path.exists('output'):
+            os.mkdir('output')
 
         # Save the playlist to a JSON file
         filename = f'output/{data_request_type.lower()}/{name.title()}--{id}.json'
@@ -148,6 +152,10 @@ if input_id:
             
             print(f"Audio Features 1:\n\n")
             print(tabulate(audioFeatures_df.head(), headers='keys', tablefmt='psql'))
+            
+            # Check if the `output/temporary_storage` folder exists
+            if not os.path.exists('output/temporary_storage'):
+                os.mkdir('output/temporary_storage')
 
             # Save the trackList_df and audioFeatures_df to temporary_storage folder
             if trackList_df is not None and audioFeatures_df is not None:
