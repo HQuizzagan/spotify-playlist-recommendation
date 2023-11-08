@@ -1,7 +1,11 @@
 import requests
 import os
-from dotenv import load_dotenv
-load_dotenv()
+import toml
+
+# Load the TOML file
+config = toml.load('config.toml')
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 def getAppAccessToken():
@@ -21,12 +25,15 @@ def getAppAccessToken():
     auth_response = requests.post(
         url,
         data=body_params,
-        auth=(os.getenv('SPOTIFY_CLIENT_ID'),
-              os.getenv('SPOTIFY_CLIENT_SECRET'))
+        # auth=(os.getenv('SPOTIFY_CLIENT_ID'),
+        #       os.getenv('SPOTIFY_CLIENT_SECRET'))
+        auth=(
+            config['spotify']['SPOTIFY_CLIENT_ID'],
+            config['spotify']['SPOTIFY_CLIENT_SECRET']
+        )
     ).json()
 
     return auth_response
-
 
 def validateToken(access_token):
     '''
