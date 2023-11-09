@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    hquizzagan:
+      email: hquizzagan39@gmail.com
+      name: Harlee Quizzagan
+      password: $2b$12$cgWhhaa7fRq8vHhVC9jsk.McIlVjTQ4MP.aGGq8OK25u3h8zbwSlG
+    viking_chua:
+      email: vibchua24@xs.edu.ph
+      name: Viking Irving Chua
+      password: $2b$12$n8Sec5PveGfE66hCmOQkle/NGWe0iKXmLJ1FpjPCzya.S5ntePWVa
+cookie:
+  expiry_days: 1
+  key: spotify_scraper_auth
+  name: spotify_scraper_auth_cookie
+preauthorized:
+  emails:
+  - hquizzagan39@gmail.com
