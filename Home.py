@@ -137,19 +137,24 @@ if input_id:
         if not os.path.exists('output'):
             os.mkdir('output')
             
+        # Inside the `output` folder, create subfolders: `playlists`, and `temporary_storage`
+        if not os.path.exists('output/playlists'):
+            os.mkdir('output/playlists')
+        if not os.path.exists('output/temporary_storage'):
+            os.mkdir('output/temporary_storage')
+            
         st.info(f'Directories Created: {os.listdir()}')
+        st.info(f'Subdirectories: {os.listdir("output")}')
 
         # Save the playlist to a JSON file
         try:
             filename = f'output/{data_request_type.lower()}/{name.title()}--{id}.json'
             with open(filename, 'w') as f:
                 json.dump(playlistData, f, indent=4)
+            st.success(f"Playlist data has been saved to {filename}")
         except Exception as e:
             st.error(f"Error: {e}")
             print(f"Saving to Output Error: {e}")
-            st.info(f'Directories in `output`: {os.listdir("output")}')
-
-        st.success(f"Playlist data has been saved to {filename}")
 
         if col2.button('Extract Audio Features'):
             audioFeatures = Tracks.getAudioFeatures(
