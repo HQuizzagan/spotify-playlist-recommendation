@@ -2,14 +2,46 @@ import os
 import json
 import pandas as pd
 import streamlit as st
+import streamlit_authenticator as stauth
 from utilities import SpotifyAuth, Playlists, Tracks
 from tabulate import tabulate
+import yaml
+from yaml.loader import SafeLoader
+import streamlit as st
+import streamlit_authenticator as stauth
 
 st.set_page_config(
   page_title="HOME",
   page_icon="🏠"
 )
 
+with open("config.yaml") as f:
+    config = yaml.load(f, Loader=SafeLoader)
+    
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
+)
+
+authenticator.login('Login', 'main')
+
+# Check if user is authenticated
+if st.session_state['authentication_status']:
+    st.balloons()
+    st.toast(f'Welcome, {st.session_state["name"]}! You are now logged in.', icon='🏠')
+    st.toast('You can now use the app.', icon='🎉')
+    st.toast('Make sure to check the general description provided in the shared Notion page before using.', icon='📝')
+    authenticator.logout('Logout', 'sidebar', key='logout_button')
+elif st.session_state["authentication_status"] is False:
+    st.error('Username/password is incorrect')
+    st.stop()
+else:
+    st.error('You are not yet logged in. Please login first.')
+    st.stop()
+    
 st.header('🏠 Spotify Data Scraper')
 st.write('by **HQuizzagan** -- *25th July 2023*')
 
