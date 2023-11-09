@@ -2,6 +2,7 @@
 *.toml
 *.venv*
 .DS_Store
+.streamlit
 
 # Ignore also the `datasets` and `output` directory
 datasets
