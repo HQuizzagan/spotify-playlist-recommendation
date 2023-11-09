@@ -67,23 +67,23 @@ def validateToken(access_token):
             spotify_access_token = getAppAccessToken()['access_token']
                     
             # Save the new access token to the .env file
-            with open('.env', 'r') as f:
-                lines = f.readlines()
+            # with open('.env', 'r') as f:
+            #     lines = f.readlines()
 
-                # Modify the line that contains the variable
-                new_lines = []
-                for line in lines:
-                    if line.startswith('SPOTIFY_ACCESS_TOKEN='):
-                        line = f'SPOTIFY_ACCESS_TOKEN={spotify_access_token}\n'
-                    new_lines.append(line)
+            #     # Modify the line that contains the variable
+            #     new_lines = []
+            #     for line in lines:
+            #         if line.startswith('SPOTIFY_ACCESS_TOKEN='):
+            #             line = f'SPOTIFY_ACCESS_TOKEN={spotify_access_token}\n'
+            #         new_lines.append(line)
 
-                # Check if a .env file exists. If not, create one first. Otherwise, just overwrite the existing one.
-                if os.path.exists('.env'):
-                    with open('.env', 'w') as f:
-                        f.writelines(new_lines)
-                else:
-                    with open('.env', 'x') as f:
-                        f.writelines(new_lines)
+            #     # Check if a .env file exists. If not, create one first. Otherwise, just overwrite the existing one.
+            #     if os.path.exists('.env'):
+            #         with open('.env', 'w') as f:
+            #             f.writelines(new_lines)
+            #     else:
+            #         with open('.env', 'x') as f:
+            #             f.writelines(new_lines)
 
             print(f"New Spotify Access Token:\n{spotify_access_token}")
 
