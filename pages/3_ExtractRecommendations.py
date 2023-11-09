@@ -143,6 +143,8 @@ if full_dataset is not None:
         st.write(f'There are {len(recommended_tracks_df)} recommended tracks.')
         st.dataframe(recommended_tracks_df)
         
+        st.info('**DOWNLOAD** then open the downloaded CSV file and **manually label** each recommended track as either **0** or **1** based on whether the recommended track indeed belongs to the playlist or not. Create a LABEL column on the file and save it.')
+        
         # Download the recommended tracks as CSV
         if st.download_button(
           label='Download Recommended Tracks as CSV',
@@ -151,8 +153,6 @@ if full_dataset is not None:
           mime='text/csv',
         ):
           st.balloons()
-          
-          st.success('Open the downloaded CSV file and **manually label** each recommended track as either **0** or **1** based on whether the recommended track indeed belongs to the playlist or not. Create a LABEL column on the file and save it.')
 
       else:
         st.error('You have not selected or completed the list of seed tracks yet.')
