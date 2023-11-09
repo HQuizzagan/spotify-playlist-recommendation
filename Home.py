@@ -140,9 +140,14 @@ if input_id:
         st.info(f'Directories Created: {os.listdir()}')
 
         # Save the playlist to a JSON file
-        filename = f'output/{data_request_type.lower()}/{name.title()}--{id}.json'
-        with open(filename, 'w') as f:
-            json.dump(playlistData, f, indent=4)
+        try:
+            filename = f'output/{data_request_type.lower()}/{name.title()}--{id}.json'
+            with open(filename, 'w') as f:
+                json.dump(playlistData, f, indent=4)
+        except Exception as e:
+            st.error(f"Error: {e}")
+            print(f"Saving to Output Error: {e}")
+            st.info(f'Directories in `output`: {os.listdir("output")}')
 
         st.success(f"Playlist data has been saved to {filename}")
 
