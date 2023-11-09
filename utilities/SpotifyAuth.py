@@ -1,9 +1,9 @@
 import requests
 import os
-import toml
-
+import streamlit as st
+# import toml
 # Load the TOML file
-config = toml.load('config.toml')
+# config = toml.load('config.toml')
 # from dotenv import load_dotenv
 # load_dotenv()
 
@@ -27,9 +27,13 @@ def getAppAccessToken():
         data=body_params,
         # auth=(os.getenv('SPOTIFY_CLIENT_ID'),
         #       os.getenv('SPOTIFY_CLIENT_SECRET'))
+        # auth=(
+        #     config['spotify']['SPOTIFY_CLIENT_ID'],
+        #     config['spotify']['SPOTIFY_CLIENT_SECRET']
+        # )
         auth=(
-            config['spotify']['SPOTIFY_CLIENT_ID'],
-            config['spotify']['SPOTIFY_CLIENT_SECRET']
+            st.secrets['SPOTIFY_CLIENT_ID'],
+            st.secrets['SPOTIFY_CLIENT_SECRET']
         )
     ).json()
 
@@ -38,6 +42,14 @@ def getAppAccessToken():
 def validateToken(access_token):
     '''
     Checks if the current access token is still valid by sending a simple request to Spotify's API. If it is not valid, request for a new one, and save it to the environment variables.
+    
+    INPUT
+        access_token (str) - The current access token to be validated
+        
+    OUTPUT
+        spotify_access_token (str) - The new access token if the current one is invalid
+        response (dict) - The response from the API
+        success (bool) - True if authentication is successful, False otherwise
     '''
 
     try:
@@ -53,7 +65,8 @@ def validateToken(access_token):
 
             # If the response is an error, then the token is invalid. Request for a new token and replace the environment variable
             spotify_access_token = getAppAccessToken()['access_token']
-
+                    
+            # Save the new access token to the .env file
             with open('.env', 'r') as f:
                 lines = f.readlines()
 
@@ -64,15 +77,19 @@ def validateToken(access_token):
                         line = f'SPOTIFY_ACCESS_TOKEN={spotify_access_token}\n'
                     new_lines.append(line)
 
-                # Write the .env file
-                with open('.env', 'w') as file:
-                    file.writelines(new_lines)
+                # Check if a .env file exists. If not, create one first. Otherwise, just overwrite the existing one.
+                if os.path.exists('.env'):
+                    with open('.env', 'w') as f:
+                        f.writelines(new_lines)
+                else:
+                    with open('.env', 'x') as f:
+                        f.writelines(new_lines)
 
             print(f"New Spotify Access Token:\n{spotify_access_token}")
 
-            return spotify_access_token, response
+            return spotify_access_token, response, True
         else:
-            return None, response
+            return None, response, True
     except Exception as e:
         print(f"Exception:\n{e}")
-        return None, None
+        return None, f"Exception:\n{e}", False
