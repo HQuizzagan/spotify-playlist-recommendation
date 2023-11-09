@@ -20,16 +20,26 @@ st.session_state['playlistInfo'] = None
 # CALLBACK FUNCTIONS
 def resetAccessToken(access_token):
     # Check if access token is still valid. If it is invalid, the function will request for a new one
-    new_spotify_access_token, validateResponse = SpotifyAuth.validateToken(
-        access_token)
+    new_spotify_access_token, validateResponse, success = SpotifyAuth.validateToken(access_token)
 
-    if new_spotify_access_token is None:
+    # Case 1: CURRENT access token is still valid
+    if new_spotify_access_token is None and success:
         st.session_state['token_is_valid'] = True
         st.session_state['spotify_access_token'] = access_token
-    else:
+    # Case 2: CURRENT access token is invalid and a NEW access token has been generated
+    elif new_spotify_access_token is not None and success:
         st.session_state['token_is_valid'] = False
         # Reset the access token
         st.session_state['spotify_access_token'] = new_spotify_access_token
+    # Case 3: CURRENT access token is invalid and a NEW access token has NOT been generated
+    else:
+        st.session_state['token_is_valid'] = False
+        st.session_state['spotify_access_token'] = None
+        st.error(f'''
+                 There was an error in validating your access token.
+                 Error:
+                    {validateResponse}''')
+        st.stop()
 
     return validateResponse
 
@@ -55,8 +65,8 @@ with st.sidebar:
                 st.success('Token is valid.')
                 st.balloons()
             else:
-                st.error(
-                    f"Token is invalid. Error: {validateResponse}")
+                st.error(f"Token is invalid. Error: {validateResponse}")
+                st.stop()
 
                 st.write(
                     f"A new access token has been generated. Please copy the new access token and paste it in the text box.")
