@@ -138,7 +138,7 @@ if input_id:
             os.mkdir('output')
             
         # Inside the `output` folder, create subfolders: `playlists`, and `temporary_storage`
-        if not os.path.exists('output/playlists'):
+        if not os.path.exists('output/playlist'):
             os.mkdir('output/playlists')
         if not os.path.exists('output/temporary_storage'):
             os.mkdir('output/temporary_storage')
