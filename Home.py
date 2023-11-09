@@ -30,10 +30,10 @@ authenticator.login('Login', 'main')
 
 # Check if user is authenticated
 if st.session_state['authentication_status']:
-    st.balloons()
-    st.toast(f'Welcome, {st.session_state["name"]}! You are now logged in.', icon='🏠')
-    st.toast('You can now use the app.', icon='🎉')
-    st.toast('Make sure to check the general description provided in the shared Notion page before using.', icon='📝')
+    # st.balloons()
+    # st.toast(f'Welcome, {st.session_state["name"]}! You are now logged in.', icon='🏠')
+    # st.toast('You can now use the app.', icon='🎉')
+    # st.toast('Make sure to check the general description provided in the shared Notion page before using.', icon='📝')
     authenticator.logout('Logout', 'sidebar', key='logout_button')
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
