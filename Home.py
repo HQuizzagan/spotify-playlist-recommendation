@@ -98,11 +98,9 @@ with st.sidebar:
                 st.balloons()
             else:
                 st.error(f"Token is invalid. Error: {validateResponse}")
-                st.stop()
-
-                st.write(
-                    f"A new access token has been generated. Please copy the new access token and paste it in the text box.")
+                st.write(f"A new access token has been generated. Please copy the new access token and paste it in the text box.")
                 st.text(f"{st.session_state.spotify_access_token}")
+                st.stop()
 
     st.write('Select which data you want to request from Spotify.')
 
