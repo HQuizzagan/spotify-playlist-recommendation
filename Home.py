@@ -139,10 +139,15 @@ if input_id:
             
         # Inside the `output` folder, create subfolders: `playlists`, and `temporary_storage`
         if not os.path.exists('output/playlist'):
-            os.mkdir('output/playlists')
+            os.mkdir('output/playlist')
         if not os.path.exists('output/temporary_storage'):
             os.mkdir('output/temporary_storage')
-            
+        
+        # Inside `output` folder, delete other sub-folders that are not `playlist` or `temporary_storage`
+        for folder in os.listdir('output'):
+            if folder not in ['playlist', 'temporary_storage']:
+                os.rmdir(f'output/{folder}')
+    
         st.info(f'Directories Created: {os.listdir()}')
         st.info(f'Subdirectories: {os.listdir("output")}')
 
