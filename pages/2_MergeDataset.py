@@ -78,3 +78,5 @@ else:
             
             # Save to temporary_storage as well
             playlist_full_dataset.to_csv(f"output/temporary_storage/{selected_playlist_NAME}-{selected_playlist_ID}-full-dataset.csv", index=False)
+            
+            st.info('Now, proceed right away to ExtractRecommendations to generate up to 50 recommended songs based on SEED TRACKS from your playlist.')

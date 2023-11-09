@@ -148,8 +148,8 @@ if input_id:
             if folder not in ['playlist', 'temporary_storage']:
                 os.rmdir(f'output/{folder}')
     
-        st.info(f'Directories Created: {os.listdir()}')
-        st.info(f'Subdirectories: {os.listdir("output")}')
+        # st.info(f'Directories Created: {os.listdir()}')
+        # st.info(f'Subdirectories: {os.listdir("output")}')
 
         # Save the playlist to a JSON file
         try:
@@ -160,6 +160,7 @@ if input_id:
         except Exception as e:
             st.error(f"Error: {e}")
             print(f"Saving to Output Error: {e}")
+            st.stop()
 
         if col2.button('Extract Audio Features'):
             audioFeatures = Tracks.getAudioFeatures(
@@ -190,6 +191,7 @@ if input_id:
                 audioFeatures_df.to_csv(f"output/temporary_storage/{name}-{id}-audio-features.csv", index=False)
                 
                 st.success(f"Track list and audio features data has been saved to output/temporary_storage folder.")
+                st.info('Now, proceed to the **MergeDataset** page to create the combined dataset (i.e. Track List + Audio Features).')
 
     else:
         st.error(f"Error: {playlistData['error']['message']}")
