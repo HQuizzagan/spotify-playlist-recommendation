@@ -136,6 +136,8 @@ if input_id:
         # Check if the `output` folder exists. If not, create it.
         if not os.path.exists('output'):
             os.mkdir('output')
+            
+        st.info(f'Directories Created: {os.listdir()}')
 
         # Save the playlist to a JSON file
         filename = f'output/{data_request_type.lower()}/{name.title()}--{id}.json'
