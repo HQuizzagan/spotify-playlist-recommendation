@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 st.header('🎻 Extract Audio Features of Recommended Tracks')
-st.info('Once all the 200 RECOMMENDED TRACKS have been generated **and labelled**, you can use this page to extract the corresponding AUDIO FEATURES for each recommended track.')
+st.info('Once all the RECOMMENDED TRACKS have been generated **and labelled**, you can use this page to extract the corresponding AUDIO FEATURES for each recommended track.')
 
 st.sidebar.markdown('''
     **STEPS:**
@@ -35,14 +35,15 @@ if uploaded_file is not None:
         st.stop()
         
     # Check if there's already 200 recommended tracks
-    if raw_csv_df is not None and len(raw_csv_df) < 200:
-        st.error('You have not extracted 200 recommended tracks yet. Please proceed to extracting the recommended tracks first.')
+    target_num_tracks = 50
+    if raw_csv_df is not None and len(raw_csv_df) < target_num_tracks:
+        st.error(f'You have not extracted {target_num_tracks} recommended tracks yet. Please proceed to extracting the recommended tracks first.')
         st.stop()
-    elif raw_csv_df is not None and len(raw_csv_df) > 200:
-        st.error('You have extracted more than 200 recommended tracks. Please upload a CSV file that contains 200 recommended tracks only.')
+    elif raw_csv_df is not None and len(raw_csv_df) > target_num_tracks:
+        st.error(f'You have extracted more than {target_num_tracks} recommended tracks. Please upload a CSV file that contains {target_num_tracks} recommended tracks only.')
         st.stop()
     else:
-        st.success('You have extracted 200 recommended tracks. You may now proceed to extracting the audio features of each recommended track.')
+        st.success(f'You have extracted {target_num_tracks} recommended tracks. You may now proceed to extracting the audio features of each recommended track.')
         
     # Check if all the songs have been labelled
     if raw_csv_df['LABEL'].isnull().values.any():
@@ -52,11 +53,11 @@ if uploaded_file is not None:
         st.success('All the recommended tracks have been labelled.')
         
     # Show the raw CSV file
-    st.subheader('200 Recommended Tracks')
+    st.subheader(f'{target_num_tracks} Recommended Tracks')
     st.dataframe(raw_csv_df)
     
     # Extract the audio features of the recommended tracks
-    if st.button('Extract AUDIO Features of the 200 Recommended Tracks'):
+if st.button(f'Extract AUDIO Features of the {target_num_tracks} Recommended Tracks'):
         # Extract the audio features of the recommended tracks
         recommended_tracks_audio_features = Tracks.getAudioFeatures(
             st.session_state['spotify_access_token'],
