@@ -24,6 +24,8 @@ uploaded_file = st.file_uploader(
     key='raw_csv_file',
 )
 
+target_num_tracks = 200
+
 # Get the uploaded file
 if uploaded_file is not None:
     # Read the CSV file
@@ -35,7 +37,6 @@ if uploaded_file is not None:
         st.stop()
         
     # Check if there's already 200 recommended tracks
-    target_num_tracks = 200
     if raw_csv_df is not None and len(raw_csv_df) < target_num_tracks:
         st.error(f'You have not extracted {target_num_tracks} recommended tracks yet. Please proceed to extracting the recommended tracks first.')
         st.stop()
